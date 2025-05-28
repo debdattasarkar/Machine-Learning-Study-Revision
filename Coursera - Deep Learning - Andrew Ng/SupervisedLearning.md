@@ -89,3 +89,108 @@ This image is a visual explanation of a **classification problem** in machine le
 * **Input:** Tumor size (a continuous feature).
 * **Output:** Class label (benign or malignant).
 * **Goal:** Train a classifier to predict whether a tumor is malignant based on size.
+
+![Supervised Learning - Coursera](images/Supervised-Learning2.png)
+
+This updated image provides a more detailed explanation of the **classification process in supervised learning**, specifically applied to **breast cancer diagnosis**.
+
+---
+
+### 🧬 **Breast Cancer Classification – Enhanced Explanation**
+
+#### 🎯 Objective:
+
+Predict whether a tumor is **malignant (1)** or **benign (0)** based on its **size** using a classification model.
+
+---
+
+### 🔍 Graph Components:
+
+#### **Top Graph**:
+
+* **X-axis:** Tumor Size
+* **Y-axis:** Classification Output
+
+  * `0 (N)` = **Benign**
+  * `1 (Y)` = **Malignant**
+* **Red Xs:** Malignant cases (label = 1)
+* **Blue Xs:** Benign cases (label = 0)
+* **Pink Arrow:** Indicates a threshold tumor size, used to decide the class boundary.
+
+#### **Bottom Graph**:
+
+* Visualizes **new/test tumor sizes** (represented as blue circles) being evaluated.
+* **Green dashed arrows** show how these new tumor instances are classified based on size.
+
+  * Small tumors → classified as benign (left side)
+  * Large tumors → classified as malignant (right side)
+
+---
+
+### 🧠 Classification Concepts (Right Panel):
+
+* **Classification** = Predicting **discrete-valued outputs**
+
+  * Binary: `0` or `1`
+  * Multi-class: `0`, `1`, `2`, `3`, etc.
+
+    * E.g., `0 = benign`, `1 = type-1 cancer`, `2 = type-2 cancer`, etc.
+* **Supervised Learning:** Uses labeled data to train the model (tumor size → label)
+
+---
+
+### ✅ Summary:
+
+* **Input:** Tumor Size (continuous feature)
+* **Output:** Class Label (discrete – 0 or 1)
+* **Goal:** Learn a boundary to correctly classify unseen tumor data.
+* The image simulates how predictions are made and highlights the **importance of decision boundaries** in classification tasks.
+
+---
+
+
+![Supervised Learning - Coursera](images/Supervised-Learning3.png)
+
+This image illustrates the concept of **classification in machine learning using multiple features** to distinguish between two classes—most likely **benign vs. malignant tumors**—in a breast cancer diagnosis context.
+
+---
+
+### 🧠 **Multivariate Classification — Explained**
+
+#### 📊 Graph Details:
+
+* **X-axis:** Tumor Size
+* **Y-axis:** Age
+* **Blue Circles (⭕):** One class (likely **benign**)
+* **Red Crosses (❌):** Another class (likely **malignant**)
+
+#### ⚫ Black Line:
+
+* A **decision boundary** learned by the classifier to separate the two classes based on the input features (Age and Tumor Size).
+* Points to the **left and below** the line → classified as blue class (benign).
+* Points to the **right and above** the line → classified as red class (malignant).
+
+#### 🟣 Purple Dot:
+
+* A test or new data point to be classified. Its position relative to the decision boundary will determine its predicted label.
+
+---
+
+### 🧬 Features in Breast Cancer Diagnosis:
+
+On the right side of the image, we see a list of **other potential features** used in real-world cancer classification tasks:
+
+* **Clump Thickness**
+* **Uniformity of Cell Size**
+* **Uniformity of Cell Shape**
+* ... (indicating more features like Bare Nuclei, Mitoses, etc.)
+
+These features are often extracted from medical imaging or biopsy data and form the **feature vector** used for model training.
+
+---
+
+### 🧾 Summary:
+
+* This is a **binary classification problem** with **multivariate inputs**.
+* The **goal** is to find a boundary in the multidimensional space that best separates the two classes.
+* This type of setup is common in models like **logistic regression**, **support vector machines (SVMs)**, or **decision trees**.
