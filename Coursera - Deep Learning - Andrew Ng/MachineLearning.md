@@ -1,7 +1,7 @@
 # Machine Learning definition
-• Arthur Samuel (1959). Machine Learning: Field of study that gives computers the ability to learn without being explicitly programmed.
 
-Thanks for the additional image. This slide references Tom Mitchell’s formal definition of a well-posed learning problem in machine learning. I’ll update and enhance the previously generated `README.md` to include this foundational definition.
+> **Arthur Samuel (1959):**
+> Machine Learning: Field of study that gives computers the ability to learn without being explicitly programmed.
 
 ---
 
