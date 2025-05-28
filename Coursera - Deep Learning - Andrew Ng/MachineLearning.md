@@ -27,6 +27,8 @@ This project explores one of the foundational definitions in machine learning in
 
 This definition forms the backbone of how we understand and structure learning problems in the field of machine learning.
 
+So Tom defines machine learning by saying that a well-posed learning problem is defined as follows. He says, a computer program is said to learn from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E. I actually think he came out with this definition just to make it rhyme. For the checkers playing examples, the experience E would be the experience of having the program play tens of thousands of games itself. The task T would be the task of playing checkers, and the performance measure P will be the probability that wins the next game of checkers against some new opponent.
+
 ## Learning Framework
 
 According to the definition:
