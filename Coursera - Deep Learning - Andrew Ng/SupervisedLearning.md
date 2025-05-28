@@ -1,4 +1,4 @@
-![Supervised Learning - Coursera](images/Supervised-Learning-Coursera.png)
+![Supervised Learning - Coursera](images/House-Pricing.png)
 
 ---
 
@@ -36,4 +36,56 @@ This image illustrates a **regression problem** in **supervised learning**, wher
 
 ---
 
-This type of visualization helps in understanding how different models (linear vs nonlinear) can impact prediction accuracy in real-world problems like housing price estimation. Let me know if you’d like this translated into a Markdown cell for a notebook or for a README section!
+This type of visualization helps in understanding how different models (linear vs nonlinear) can impact prediction accuracy in real-world problems like housing price estimation.
+
+![Supervised Learning - Coursera](images/Supervised-Learning.png)
+
+This image is a visual explanation of a **classification problem** in machine learning, specifically for **breast cancer diagnosis** (malignant vs. benign tumors).
+
+---
+
+### 🩺 **Breast Cancer Classification — Explained**
+
+#### 📊 Graph Overview:
+
+* **X-axis:** Tumor size.
+* **Y-axis:** Output label (classification):
+
+  * `0 (N)` → Not malignant (benign)
+  * `1 (Y)` → Malignant (cancerous)
+
+#### 🔵 Blue Crosses:
+
+* Represent tumors that are **benign** (label = 0).
+* These tumors have smaller sizes, based on the left side of the x-axis.
+
+#### 🔴 Red Crosses:
+
+* Represent **malignant** tumors (label = 1).
+* Typically found with larger tumor sizes.
+
+#### 🎯 Classification Boundary:
+
+* There's an implied threshold tumor size (marked by a pink arrow) — to the left of it, tumors are classified as benign, and to the right, as malignant.
+
+---
+
+### 🧠 Machine Learning Context
+
+#### 🔍 Classification Task:
+
+* Unlike regression (continuous output), classification deals with **discrete-valued outputs**.
+* In this case: **binary classification** (`0` or `1`).
+* But classification can also extend to **multi-class outputs** (e.g., `0`, `1`, `2`, `3`) as shown in the hand-drawn note at the bottom-right (like for different cancer types).
+
+#### ✅ Supervised Learning:
+
+* The model learns from labeled examples: tumor size → label (malignant or not).
+
+---
+
+### 💡 Key Takeaways:
+
+* **Input:** Tumor size (a continuous feature).
+* **Output:** Class label (benign or malignant).
+* **Goal:** Train a classifier to predict whether a tumor is malignant based on size.
