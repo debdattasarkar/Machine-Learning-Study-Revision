@@ -1,3 +1,11 @@
+# Supervised Learning
+
+In supervised learning, we are given a data set and already know what our correct output should look like, having the idea that there is a relationship between the input and the output.
+
+Supervised learning problems are categorized into "regression" and "classification" problems. In a regression problem, we are trying to predict results within a continuous output, meaning that we are trying to map input variables to some continuous function. In a classification problem, we are instead trying to predict results in a discrete output. In other words, we are trying to map input variables into discrete categories. 
+
+--- 
+
 ![Supervised Learning - Coursera](images/House-Pricing.png)
 
 ---
@@ -194,3 +202,53 @@ These features are often extracted from medical imaging or biopsy data and form 
 * This is a **binary classification problem** with **multivariate inputs**.
 * The **goal** is to find a boundary in the multidimensional space that best separates the two classes.
 * This type of setup is common in models like **logistic regression**, **support vector machines (SVMs)**, or **decision trees**.
+
+
+---
+
+![Supervised Learning - Coursera](images/Supervised-Learning-Question.png)
+
+Here's the explanation of the multiple-choice question shown in the image:
+
+---
+
+### 🧠 **Classification vs. Regression: Understanding the Problem Types**
+
+#### 🧾 Question Breakdown:
+
+You're given **two problems** and need to decide whether each should be handled as a **classification** or **regression** task.
+
+---
+
+### 🟨 **Problem 1: Inventory Sales Forecasting**
+
+> *"You have a large inventory of identical items. You want to predict how many of these items will sell over the next 3 months."*
+
+* 🔍 **Nature of output:** A **numerical value** (e.g., 127 units sold).
+* ✅ **Type of problem:** **Regression**
+
+  * Because you're predicting a **continuous quantity**.
+
+---
+
+### 🟩 **Problem 2: Customer Account Compromise Detection**
+
+> *"Examine individual customer accounts and decide if each has been hacked/compromised."*
+
+* 🔍 **Nature of output:** A **label** or **category** (e.g., "compromised" or "not compromised").
+* ✅ **Type of problem:** **Classification**
+
+  * Because the goal is to assign each input (account) to one of **discrete classes** (e.g., 0 or 1).
+
+---
+
+### ✅ **Correct Answer:**
+
+> **"Treat problem 1 as a regression problem, problem 2 as a classification problem."**
+
+This is the correct approach because:
+
+* Problem 1 deals with **quantitative prediction** → **Regression**.
+* Problem 2 deals with **categorical classification** → **Classification**.
+
+---
