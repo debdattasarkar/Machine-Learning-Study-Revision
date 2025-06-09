@@ -181,3 +181,137 @@ for _ in range(100):
 ```
 
 ---
+Using **Swish activation** in CNNs with **operator fusion** in **TensorFlow** introduces both **opportunities and challenges**. Here's a complete breakdown:
+
+---
+
+## 🔍 What Is Operator Fusion?
+
+> **Operator fusion** combines multiple operations (like `Conv2D + Bias + Activation`) into **one kernel**, improving:
+
+* Execution speed (less memory overhead)
+* Power efficiency
+* Deployment compactness
+
+✅ In TensorFlow, fusions are applied by:
+
+* `tf.function(jit_compile=True)` (XLA compiler)
+* TensorFlow Lite converter
+* SNPE's `snpe-dlc-optimize` tool
+
+---
+
+## 🧠 Why Is Swish Tricky for Fusion?
+
+Swish is defined as:
+
+$$
+\text{Swish}(x) = x \cdot \sigma(x) = \frac{x}{1 + e^{-x}}
+$$
+
+This includes:
+
+* `Sigmoid` → slow on some backends
+* `Mul` → extra operation
+
+Fusing `Conv2D + Swish` is **non-trivial** compared to `Conv2D + ReLU`.
+
+---
+
+## ✅ Swish Fusion in TensorFlow
+
+### 🔧 1. Fused Code Example with XLA:
+
+```python
+import tensorflow as tf
+
+@tf.function(jit_compile=True)  # Enables XLA operator fusion
+def fused_conv_swish(x, weights, bias):
+    x = tf.nn.conv2d(x, weights, strides=1, padding='SAME')
+    x = tf.nn.bias_add(x, bias)
+    return x * tf.nn.sigmoid(x)  # Swish
+```
+
+✅ When wrapped with `@tf.function(jit_compile=True)`, TensorFlow will attempt to **fuse** all these ops using XLA.
+
+---
+
+### 🔬 2. Swish via Keras Layer (non-fused unless XLA used)
+
+```python
+model = tf.keras.Sequential([
+    tf.keras.layers.Conv2D(64, 3, padding='same', input_shape=(64, 64, 3)),
+    tf.keras.layers.Activation('swish'),  # Not fused unless JIT compiled
+    tf.keras.layers.Conv2D(64, 3, padding='same'),
+])
+```
+
+⚠️ This may not be fused automatically unless wrapped in a compiled function.
+
+---
+
+## 🔍 Fusion Visualization & Confirmation
+
+To inspect whether fusion happened:
+
+```python
+from tensorflow.python.framework.convert_to_constants import convert_variables_to_constants_v2
+import tensorflow as tf
+
+# Convert model to graph
+f = tf.function(fused_conv_swish).get_concrete_function(
+    tf.TensorSpec(shape=[1, 64, 64, 3], dtype=tf.float32),
+    tf.TensorSpec(shape=[3, 3, 3, 64], dtype=tf.float32),
+    tf.TensorSpec(shape=[64], dtype=tf.float32)
+)
+graph_def = convert_variables_to_constants_v2(f).graph.as_graph_def()
+
+# Print fused operations
+for node in graph_def.node:
+    print(node.op)
+```
+
+Look for ops like:
+
+* `_FusedConv2D`
+* `XlaCallModule`
+* `SwishFused` (in TFLite or SNPE)
+
+---
+
+## 📱 Mobile Deployment Note (SNPE, TFLite)
+
+### SNPE:
+
+* May **fuse Swish** if implemented manually as `x * sigmoid(x)` in TensorFlow before conversion.
+* Use `snpe-dlc-optimize` to detect and log fusions.
+
+### TFLite:
+
+* Swish is supported and often fused if written in fused form.
+* But may not work well in **int8 quantized models** due to sigmoid complexity.
+
+---
+
+## ✅ Best Practices
+
+| Goal                         | Recommendation                                          |
+| ---------------------------- | ------------------------------------------------------- |
+| Want Swish + fusion          | Use `@tf.function(jit_compile=True)`                    |
+| Targeting mobile             | Prefer `ReLU` or `ReLU6` if quantized                   |
+| Use EfficientNet-style Swish | Prefer `tf.keras.activations.swish` or `x * sigmoid(x)` |
+| Exporting to SNPE            | Inline Swish (don't use Keras alias)                    |
+
+---
+
+## 🚀 Summary
+
+| Feature            | Swish Fusion Support       |
+| ------------------ | -------------------------- |
+| TensorFlow CPU/GPU | ✅ With `jit_compile=True`  |
+| TFLite             | ✅ Partial                  |
+| SNPE               | ⚠️ Manual Swish works best |
+| Quantization       | ❌ Expensive for int8       |
+
+---
+
